@@ -110,17 +110,59 @@ export default {
 						transform: 'translateX(0)',
 						opacity: '1'
 					}
+				},
+				'spin-slow': {
+					'0%': { 
+						transform: 'rotate(0deg)' 
+					},
+					'100%': { 
+						transform: 'rotate(360deg)' 
+					}
+				},
+				'spin-slow-reverse': {
+					'0%': { 
+						transform: 'rotate(0deg)' 
+					},
+					'100%': { 
+						transform: 'rotate(-360deg)' 
+					}
+				},
+				'float': {
+					'0%': { 
+						transform: 'translateY(0px) translateX(0px)' 
+					},
+					'50%': { 
+						transform: 'translateY(10px) translateX(10px)' 
+					},
+					'100%': { 
+						transform: 'translateY(-10px) translateX(-10px)' 
+					}
 				}
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
 				'accordion-up': 'accordion-up 0.2s ease-out',
 				'fade-in': 'fade-in 0.5s ease-out forwards',
-				'slide-in': 'slide-in 0.5s ease-out forwards'
+				'slide-in': 'slide-in 0.5s ease-out forwards',
+				'spin-slow': 'spin-slow 12s linear infinite',
+				'spin-slow-reverse': 'spin-slow-reverse 10s linear infinite',
+				'float': 'float 3s ease-in-out infinite alternate'
 			},
 			fontFamily: {
 				sans: ['Inter', 'sans-serif'],
 				heading: ['Poppins', 'sans-serif']
+			},
+			transformStyle: {
+				'3d': 'preserve-3d'
+			},
+			perspective: {
+				'1000': '1000px'
+			},
+			backfaceVisibility: {
+				'hidden': 'hidden'
+			},
+			rotate: {
+				'y-180': 'rotateY(180deg)'
 			}
 		}
 	},

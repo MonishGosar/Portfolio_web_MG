@@ -82,4 +82,33 @@
   .animation-delay-600 {
     animation-delay: 600ms;
   }
+  
+  .perspective-1000 {
+    perspective: 1000px;
+  }
+  
+  .transform-style-3d {
+    transform-style: preserve-3d;
+  }
+  
+  .backface-hidden {
+    backface-visibility: hidden;
+  }
+  
+  .rotate-y-180 {
+    transform: rotateY(180deg);
+  }
+}
+
+/* Particle animation */
+@keyframes float {
+  0% {
+    transform: translateY(0) translateX(0);
+  }
+  50% {
+    transform: translateY(10px) translateX(10px);
+  }
+  100% {
+    transform: translateY(-10px) translateX(-10px);
+  }
 }
