@@ -3,8 +3,9 @@ import { useRef } from "react";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Github } from "lucide-react";
+import { Github, ExternalLink, Maximize2 } from "lucide-react";
 import { useInView } from "@/hooks/use-in-view";
+import { HoverCard, HoverCardTrigger, HoverCardContent } from "@/components/ui/hover-card";
 
 const Projects = () => {
   const ref = useRef<HTMLDivElement>(null);
@@ -35,7 +36,7 @@ const Projects = () => {
   ];
 
   return (
-    <section id="projects" className="section bg-gray-50">
+    <section id="projects" className="section bg-gray-50 overflow-hidden">
       <div className="container-custom">
         <h2 className="text-3xl md:text-4xl font-heading font-bold mb-12 text-center">
           Featured Projects
@@ -43,41 +44,59 @@ const Projects = () => {
         
         <div 
           ref={ref}
-          className={`grid md:grid-cols-2 lg:grid-cols-3 gap-6 ${isInView ? 'opacity-100' : 'opacity-0'} transition-all duration-1000`}
+          className={`grid md:grid-cols-2 lg:grid-cols-3 gap-8 ${isInView ? 'opacity-100' : 'opacity-0'} transition-all duration-1000`}
         >
           {projects.map((project, index) => (
             <Card 
               key={index} 
-              className="overflow-hidden card-hover"
+              className="group relative overflow-hidden border-0 shadow-lg hover:shadow-2xl transition-all duration-500"
               style={{ 
                 opacity: 0,
                 animation: 'fade-in 0.5s ease-out forwards',
                 animationDelay: `${index * 200}ms`,
+                background: 'linear-gradient(135deg, #fdfcfb 0%, #e2d1c3 100%)'
               }}
             >
-              <div className="h-48 overflow-hidden relative">
+              <div className="absolute inset-0 bg-gradient-to-br from-red/30 to-gray-900/50 opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10" />
+              
+              <div className="relative h-48 overflow-hidden">
                 <img 
                   src={project.image} 
                   alt={project.title} 
-                  className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+                  className="w-full h-full object-cover transition-all duration-700 group-hover:scale-110 group-hover:rotate-2"
                 />
+                <div className="absolute inset-0 bg-black/20" />
               </div>
               
-              <CardHeader className="pb-2">
-                <CardTitle className="text-xl">{project.title}</CardTitle>
+              <CardHeader className="relative z-20">
+                <CardTitle className="text-xl font-bold">
+                  <span className="bg-gradient-to-r from-red to-red-dark bg-[length:0%_2px] group-hover:bg-[length:100%_2px] bg-no-repeat bg-left-bottom transition-all duration-500">
+                    {project.title}
+                  </span>
+                </CardTitle>
               </CardHeader>
               
-              <CardContent>
-                <p className="text-sm text-gray-600 mb-4">
-                  {project.description}
-                </p>
+              <CardContent className="relative z-20">
+                <HoverCard>
+                  <HoverCardTrigger>
+                    <Button variant="ghost" size="sm" className="p-0 h-auto text-left hover:bg-transparent">
+                      <p className="text-sm text-gray-600 line-clamp-2 hover:text-gray-900 transition-colors">
+                        {project.description}
+                      </p>
+                      <Maximize2 size={16} className="inline-block ml-1 text-gray-400" />
+                    </Button>
+                  </HoverCardTrigger>
+                  <HoverCardContent className="w-80">
+                    <p className="text-sm">{project.description}</p>
+                  </HoverCardContent>
+                </HoverCard>
                 
-                <div className="flex flex-wrap gap-2">
+                <div className="flex flex-wrap gap-2 mt-4">
                   {project.tags.map((tag, i) => (
                     <Badge 
                       key={i}
                       variant="outline" 
-                      className="bg-gray-100 text-xs"
+                      className="bg-white/80 backdrop-blur-sm text-xs font-medium transition-transform hover:scale-105"
                     >
                       {tag}
                     </Badge>
@@ -85,15 +104,27 @@ const Projects = () => {
                 </div>
               </CardContent>
               
-              <CardFooter>
-                <Button 
-                  variant="outline"
-                  size="sm"
-                  className="w-full flex items-center gap-2 hover:bg-red hover:text-white hover:border-red transition-colors"
-                >
-                  <Github size={14} />
-                  View Project
-                </Button>
+              <CardFooter className="relative z-20">
+                <div className="flex gap-2 w-full">
+                  <Button 
+                    variant="outline"
+                    size="sm"
+                    className="flex-1 bg-white/80 backdrop-blur-sm hover:bg-red hover:text-white hover:border-red transition-all group"
+                  >
+                    <Github size={14} className="mr-2" />
+                    Code
+                    <span className="absolute inset-x-0 w-0 h-full bg-red transition-all duration-300 -z-10 group-hover:w-full" />
+                  </Button>
+                  <Button 
+                    variant="outline"
+                    size="sm"
+                    className="flex-1 bg-white/80 backdrop-blur-sm hover:bg-red hover:text-white hover:border-red transition-all group"
+                  >
+                    <ExternalLink size={14} className="mr-2" />
+                    Demo
+                    <span className="absolute inset-x-0 w-0 h-full bg-red transition-all duration-300 -z-10 group-hover:w-full" />
+                  </Button>
+                </div>
               </CardFooter>
             </Card>
           ))}
