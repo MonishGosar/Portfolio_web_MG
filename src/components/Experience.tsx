@@ -1,7 +1,7 @@
 
 import { useRef, useState } from "react";
 import { Card } from "@/components/ui/card";
-import { Briefcase, Calendar, ArrowRight, Download } from "lucide-react";
+import { Briefcase, Calendar, ArrowRight } from "lucide-react";
 import { useInView } from "@/hooks/use-in-view";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import { CountUpMetric } from "@/components/CountUpMetric";
@@ -25,15 +25,15 @@ const Experience = () => {
       company: "Indilabs.ai",
       position: "Data Science Intern",
       duration: "October 2024 - Present (7 months)",
-      metric: { value: 40, prefix: "–", suffix: "%" },
+      metric: { value: 40, prefix: "+", suffix: "% automation" },
       metricLabel: "reporting time",
       achievements: [
         "Built a real-time Monitoring Dashboard that automates KPI tracking (delinquency rates, payment trends), enabling early risk detection and slashing manual reporting effort.",
         "Automated portfolio oversight to cut operational costs by triggering proactive interventions and optimizing collection-resource allocation.",
         "Developed a Prediction & Diagnostics module with end-to-end data pipeline (cleaning, EDA, encoding), feature selection via Information Value, decision-tree modeling, and evaluation using KS, ROC-AUC, and F1 metrics.",
-        "Applied SHAP analysis to surface top payment drivers (e.g., \"Months employed,\" \"Application score\") and segment loans into High/Medium/Low-risk cohorts.",
+        "Applied SHAP analysis to surface top payment drivers (e.g., 'Months employed', 'Application score') and segment loans into High/Medium/Low-risk cohorts.",
         "Developed segment-level vintage analytics by constructing stitching (cumulative) and marginal (periodic) performance curves, combining them with segment allocations to deliver highly accurate, month-ahead recovery forecasts.",
-        "Designed \"IndiBot,\" an AI-powered recovery analytics chatbot (Streamlit + Azure OpenAI) with Routing, Query-Generation, Compute, Supervisor, and Error-Handling agents for seamless SQL-backed metric retrieval.",
+        "Designed 'IndiBot', an AI-powered recovery analytics chatbot (Streamlit + Azure OpenAI) with Routing, Query-Generation, Compute, Supervisor, and Error-Handling agents for seamless SQL-backed metric retrieval.",
         "Created an internal text-to-SQL tool that halved ad-hoc query turnaround and accelerated report generation.",
         "Leading the development of an AI-driven settlement negotiation assistant that crafts empathetic, policy-compliant counter-offers with flexible multi-installment options.",
       ],
@@ -143,7 +143,7 @@ const Experience = () => {
                         </ScrollArea>
                         
                         <div className="mt-4 text-center text-sm text-gray-500">
-                          Tap to see visualization
+                          Tap to see more and add thee additional info behind
                         </div>
                       </Card>
                       
