@@ -1,4 +1,3 @@
-
 import { useRef, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Download } from "lucide-react";
@@ -6,7 +5,6 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 const Hero = () => {
   const parallaxRef = useRef<HTMLDivElement>(null);
-  const headContainerRef = useRef<HTMLDivElement>(null);
   
   const scrollToAbout = () => {
     const aboutSection = document.getElementById("about");
@@ -23,18 +21,6 @@ const Hero = () => {
   };
   
   useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      if (!headContainerRef.current) return;
-      
-      const { clientX, clientY } = e;
-      const { left, top, width, height } = headContainerRef.current.getBoundingClientRect();
-      
-      const x = (clientX - left - width / 2) / 25;
-      const y = (clientY - top - height / 2) / 25;
-      
-      headContainerRef.current.style.transform = `perspective(1000px) rotateY(${x}deg) rotateX(${-y}deg)`;
-    };
-    
     const handleScroll = () => {
       if (!parallaxRef.current) return;
       
@@ -42,11 +28,9 @@ const Hero = () => {
       parallaxRef.current.style.transform = `translateY(${scrollTop * 0.5}px)`;
     };
     
-    document.addEventListener('mousemove', handleMouseMove);
     window.addEventListener('scroll', handleScroll);
     
     return () => {
-      document.removeEventListener('mousemove', handleMouseMove);
       window.removeEventListener('scroll', handleScroll);
     };
   }, []);
@@ -121,18 +105,15 @@ const Hero = () => {
               <Button 
                 variant="outline" 
                 className="border-gray-300 hover:border-gray-400 flex items-center gap-2 group overflow-hidden"
-                onClick={() => window.open("/resume.pdf", "_blank")}
+                onClick={() => window.open("/Monish Gosar Resume (5).pdf", "_blank")}
               >
                 <span>Download Resume</span>
-                <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
+                <Download size={16} className="transition-transform group-hover:translate-y-1" />
               </Button>
             </div>
           </div>
           
-          <div 
-            ref={headContainerRef}
-            className="relative w-48 h-48 md:w-64 md:h-64 transition-transform duration-300"
-          >
+          <div className="relative w-64 h-64 md:w-75 md:h-75">
             {/* Outer rotating ring */}
             <div className="absolute inset-0 rounded-full border-2 border-dashed border-red/30 animate-spin-slow"></div>
             
@@ -143,10 +124,22 @@ const Hero = () => {
             <div className="absolute inset-4 rounded-full bg-gradient-to-br from-gray-50 to-gray-100 shadow-lg"></div>
             
             {/* Avatar image */}
-            <Avatar className="absolute inset-8 w-auto h-auto border-4 border-white shadow-lg">
-              <AvatarImage src="/placeholder.svg" alt="Monish Gosar" />
-              <AvatarFallback className="text-2xl">MG</AvatarFallback>
+            <Avatar className="absolute inset-8 w-auto h-auto border-4 border-white shadow-lg group hover:scale-105 transition-transform duration-300">
+              <AvatarImage 
+                src="/Profile Photo Monish.jpg" 
+                alt="Monish Gosar" 
+                className="object-cover w-full h-full"
+                onError={(e) => {
+                  const target = e.target as HTMLImageElement;
+                  target.style.display = 'none';
+                }}
+              />
+              <AvatarFallback className="text-2xl bg-gradient-to-br from-gray-100 to-gray-200">
+                MG
+              </AvatarFallback>
             </Avatar>
+            {/* Add a subtle glow effect */}
+            <div className="absolute inset-8 rounded-full bg-red/10 blur-xl opacity-50 group-hover:opacity-70 transition-opacity duration-300"></div>
           </div>
         </div>
       </div>

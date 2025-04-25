@@ -1,4 +1,3 @@
-
 import { useEffect, useRef } from "react";
 import { useInView } from "@/hooks/use-in-view";
 
@@ -7,7 +6,7 @@ const About = () => {
   const isInView = useInView(ref, { once: true });
 
   return (
-    <section id="about" className="section bg-white">
+    <section id="about" className="section bg-muted/50">
       <div className="container-custom">
         <div 
           ref={ref}

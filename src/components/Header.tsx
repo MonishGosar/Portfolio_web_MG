@@ -1,6 +1,7 @@
-
 import { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
+import { Button } from "./ui/button";
+import { MessageCircle } from "lucide-react";
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -32,7 +33,7 @@ const Header = () => {
       className={cn(
         "fixed top-0 left-0 z-50 w-full transition-all duration-300", 
         isScrolled 
-          ? "bg-white bg-opacity-90 backdrop-blur-md shadow-sm py-3" 
+          ? "bg-background/80 backdrop-blur-md border-b border-border/40 py-3" 
           : "bg-transparent py-5"
       )}
     >
@@ -41,21 +42,31 @@ const Header = () => {
           className="font-heading font-bold text-lg cursor-pointer" 
           onClick={() => scrollToSection("hero")}
         >
-          Monish<span className="text-red">.</span>
+          Monish<span className="text-primary">.</span>
         </div>
         
         <nav className="hidden md:block">
           <ul className="flex items-center space-x-8">
-            {["About", "Skills", "Experience", "Projects", "Contact"].map((item) => (
+            {["Skills", "Experience", "Projects", "Contact"].map((item) => (
               <li key={item}>
                 <button 
-                  className="text-sm font-medium hover:text-red transition-colors link-hover"
+                  className="text-sm font-medium hover:text-primary transition-colors link-hover"
                   onClick={() => scrollToSection(item.toLowerCase())}
                 >
                   {item}
                 </button>
               </li>
             ))}
+            <li>
+              <Button
+                onClick={() => scrollToSection("chat")}
+                variant="default"
+                className="gap-2"
+              >
+                <MessageCircle className="w-4 h-4" />
+                Talk with me
+              </Button>
+            </li>
           </ul>
         </nav>
         
