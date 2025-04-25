@@ -5,7 +5,16 @@ const ScrollRestoration = () => {
   const { pathname } = useLocation();
 
   useEffect(() => {
-    window.scrollTo(0, 0);
+    const scrollToTop = () => {
+      requestAnimationFrame(() => {
+        window.scrollTo({
+          top: 0,
+          behavior: 'instant'
+        });
+      });
+    };
+
+    scrollToTop();
   }, [pathname]);
 
   return null;

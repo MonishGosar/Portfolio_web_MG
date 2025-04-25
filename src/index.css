@@ -42,17 +42,27 @@
   }
   
   html {
-    scroll-behavior: smooth;
-    scroll-padding-top: 4rem;
+    height: 100%;
+    overflow-y: auto;
+    overscroll-behavior-y: none;
   }
   
   body {
     @apply bg-background text-foreground font-sans antialiased;
+    height: 100%;
     overflow-x: hidden;
+    position: relative;
   }
   
   h1, h2, h3, h4, h5, h6 {
     @apply font-heading;
+  }
+
+  /* Smooth scrolling only on click, not on reload or programmatic scrolling */
+  @media (prefers-reduced-motion: no-preference) {
+    :target {
+      scroll-margin-top: 4rem;
+    }
   }
 }
 
