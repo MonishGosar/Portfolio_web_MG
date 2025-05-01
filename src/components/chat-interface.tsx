@@ -33,7 +33,7 @@ export function ChatInterface() {
     setIsLoading(true);
 
     try {
-      const response = await fetch("http://127.0.0.1:2000/chat", {
+      const response = await fetch("https://m-gpt-api.onrender.com/chat", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -86,7 +86,13 @@ export function ChatInterface() {
                         : "bg-muted/30 text-zinc-700 mr-8"
                     }`}
                   >
-                    {message.content}
+                    {message.content.split('\n').map((line, i) => (
+                      <p key={i} className="mb-2">
+                        {line.split(/\*\*(.*?)\*\*/).map((part, j) => 
+                          j % 2 === 0 ? part : <strong key={j}>{part}</strong>
+                        )}
+                      </p>
+                    ))}
                   </div>
                 </div>
               ))}
